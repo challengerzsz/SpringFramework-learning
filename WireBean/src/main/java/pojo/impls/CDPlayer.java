@@ -1,11 +1,9 @@
 package pojo.impls;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import pojo.CompactDisc;
 import pojo.MediaPlayer;
 
-@Component
 public class CDPlayer implements MediaPlayer {
 
     private CompactDisc cd;
