@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import pojo.CompactDisc;
+import pojo.Dessert;
 import pojo.MediaPlayer;
 
 import static org.junit.Assert.assertEquals;
@@ -24,6 +25,9 @@ public class CDPlayerTest {
     @Autowired
     private CompactDisc cd;
 
+    @Autowired
+    private Dessert dessert;
+
     @Test
     public void cdShouldNotBeNull() {
         assertNotNull(cd);
@@ -33,7 +37,9 @@ public class CDPlayerTest {
     public void play() {
         //测试cd已经成功自动装配为SgtPeppers的实例
         //cd.play();
-        player.play();
-        assertEquals("Playing Sgt. MixSound by zsz", log.getLog());
+//        player.play();
+//        assertEquals("Playing Sgt. MixSound by zsz", log.getLog());
+        dessert.showName();
+        assertEquals("IceCream", log.getLog());
     }
 }
