@@ -3,6 +3,7 @@ import org.junit.Test;
 import org.junit.contrib.java.lang.system.StandardOutputStreamLog;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import pojo.CompactDisc;
@@ -26,6 +27,7 @@ public class CDPlayerTest {
     private CompactDisc cd;
 
     @Autowired
+    @Qualifier("cold")
     private Dessert dessert;
 
     @Test

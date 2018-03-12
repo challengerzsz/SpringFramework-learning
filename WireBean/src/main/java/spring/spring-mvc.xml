@@ -10,7 +10,7 @@
 
     <bean id="mediaPlayer" class="pojo.impls.CDPlayer"></bean>
 
-    <!--<bean id="icecream" class="pojo.impls.IceCream" primary="true"></bean>-->
+    <!--<bean id="icecream" class="pojo.impls.IceCream"></bean>-->
     <!--<bean id="cdPlayer" class="pojo.impls.CDPlayer">-->
         <!--<constructor-arg index="0" ref="compactDisc"></constructor-arg>-->
     <!--</bean>-->
