@@ -2,8 +2,10 @@ package pojo;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import pojo.impls.CDPlayer;
+import pojo.impls.MagicExistsCondition;
 import pojo.impls.NewPeppers;
 import pojo.impls.SgtPeppers;
 
@@ -47,5 +49,9 @@ public class CDPlayerConfig {
 //        return new CDPlayer(sgtPeppers());
 //    }
 
-
+    @Bean
+    @Conditional(MagicExistsCondition.class)
+    public MagicBean magicBean() {
+        return new MagicBean();
+    }
 }

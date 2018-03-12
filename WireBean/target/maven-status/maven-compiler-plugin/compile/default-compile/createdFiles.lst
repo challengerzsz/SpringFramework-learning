@@ -1,5 +1,7 @@
 pojo\impls\CDPlayer.class
 pojo\CompactDisc.class
+pojo\DevelomentProfileConfig.class
+pojo\impls\NewPeppers.class
 pojo\impls\SgtPeppers.class
 pojo\CDPlayerConfig.class
 pojo\MediaPlayer.class

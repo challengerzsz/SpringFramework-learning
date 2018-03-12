@@ -8,9 +8,9 @@
     <context:component-scan base-package="spring"></context:component-scan>
     <bean id="compactDisc" class="pojo.impls.SgtPeppers"></bean>
 
-    <!--<bean id="mediaPlayer" class="pojo.impls.CDPlayer"></bean>-->
+    <bean id="mediaPlayer" class="pojo.impls.CDPlayer"></bean>
 
-    <bean id="cdPlayer" class="pojo.impls.CDPlayer">
-        <constructor-arg index="0" ref="compactDisc"></constructor-arg>
-    </bean>
+    <!--<bean id="cdPlayer" class="pojo.impls.CDPlayer">-->
+        <!--<constructor-arg index="0" ref="compactDisc"></constructor-arg>-->
+    <!--</bean>-->
 </beans>
