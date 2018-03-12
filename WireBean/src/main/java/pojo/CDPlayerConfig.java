@@ -7,8 +7,8 @@ import pojo.impls.CDPlayer;
 import pojo.impls.NewPeppers;
 import pojo.impls.SgtPeppers;
 
-@Configuration
-@ComponentScan
+//@Configuration
+//@ComponentScan
 public class CDPlayerConfig {
 
     @Bean
@@ -35,7 +35,7 @@ public class CDPlayerConfig {
 //        return new CDPlayer(compactDisc);
 //    }
 
-    @Bean
+//    @Bean
     public CDPlayer cdPlayer(CompactDisc compactDisc) {
         CDPlayer cdPlayer = new CDPlayer(compactDisc);
         cdPlayer.setCd(compactDisc);

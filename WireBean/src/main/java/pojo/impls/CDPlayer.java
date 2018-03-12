@@ -7,6 +7,7 @@ import pojo.MediaPlayer;
 public class CDPlayer implements MediaPlayer {
 
     private CompactDisc cd;
+    private SgtPeppers compactDisc;
 
     @Autowired
     public CDPlayer(CompactDisc cd) {
@@ -20,5 +21,13 @@ public class CDPlayer implements MediaPlayer {
 
     public void play() {
         cd.play();
+    }
+
+    public void setCompactDisc(SgtPeppers compactDisc) {
+        this.compactDisc = compactDisc;
+    }
+
+    public SgtPeppers getCompactDisc() {
+        return compactDisc;
     }
 }
