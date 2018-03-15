@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="SSMLoginTest:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="SSMLoginTest.war">
+      <element id="artifact" artifact-name="SSMLoginTest:war exploded" />
+    </root>
+  </artifact>
+</component>
