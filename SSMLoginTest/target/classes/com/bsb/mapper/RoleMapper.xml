@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+    <!--namespace用于与DAO层的接口类进行绑定,这样我们无需实现DAO层的接口
+    类,其接口类就能够自动的找到相关的SQL语句进行绑定实现-->
+    <mapper namespace="com.bsb.mapper.RoleMapper">
+         <!--select表示查询,它的id名称必须与DAO层接口的方法名相同,否则无法绑定-->
+
+    <insert id="insertRole" parameterType="role">
+        INSERT INTO role_info (rolename, note) VALUES (#{roleName}, #{note})
+    </insert>
+
+    <delete id="deleteRole" parameterType="java.lang.Long">
+        DELETE FROM role_info WHERE id = #{id}
+    </delete>
+
+    <update id="updateRole" parameterType="role">
+        UPDATE role_info SET rolename = #{roleName}, note = #{note} WHERE id = #{id}
+    </update>
+
+    <select id="getRole" parameterType="long" resultType="role">
+        select id, rolename as roleName, note FROM role_info WHERE id = #{id}
+    </select>
+
+    <select id="findRoles" parameterType="java.lang.String" resultType="role">
+        select id, rolename as roleName, note FROM role_info WHERE rolename LIKE concat('%', #{roleName}, '%')
+    </select>
+</mapper>

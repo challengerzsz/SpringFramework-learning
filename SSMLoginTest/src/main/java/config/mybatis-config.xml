@@ -2,9 +2,9 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-    <!--为com.bsb.model.User设置别名 User 方便调用-->
+    <!--为com.bsb.model.User设置别名 Role 方便调用-->
     <typeAliases>
-        <typeAlias alias="User" type="com.bsb.model.User"/>
+        <typeAlias alias="role" type="com.bsb.model.Role"/>
     </typeAliases>
 
     <!--数据库环境-->
@@ -20,8 +20,8 @@
         </environment>
     </environments>
 
-    <!--<mappers>-->
-        <!--<mapper resource="com/bsb/mapper/mybatis.xml"/>-->
-    <!--</mappers>-->
+    <mappers>
+        <mapper resource="com/bsb/mapper/RoleMapper.xml"/>
+    </mappers>
 
 </configuration>

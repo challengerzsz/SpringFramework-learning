@@ -1,0 +1,4 @@
+com\bsb\utils\SqlSessionFactoryUtils.class
+com\bsb\main\Main.class
+com\bsb\mapper\RoleMapper.class
+com\bsb\model\Role.class
