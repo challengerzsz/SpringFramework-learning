@@ -26,7 +26,7 @@ public class CDPlayerConfig {
 //            return new NewPeppers();
 //        }
 //    }
-
+//
 //    @Bean
 //    public CDPlayer cdPlayer() {
 //        return new CDPlayer(sgtPeppers());
@@ -36,7 +36,7 @@ public class CDPlayerConfig {
 //    public CDPlayer cdPlayer(CompactDisc compactDisc) {
 //        return new CDPlayer(compactDisc);
 //    }
-
+//
 //    @Bean
 //    public CDPlayer cdPlayer(CompactDisc compactDisc) {
 //        CDPlayer cdPlayer = new CDPlayer(compactDisc);
@@ -48,7 +48,7 @@ public class CDPlayerConfig {
 //    public CDPlayer anotherCDPlayer() {
 //        return new CDPlayer(sgtPeppers());
 //    }
-
+//
 //    @Bean
 //    @Conditional(MagicExistsCondition.class)
 //    public MagicBean magicBean() {
