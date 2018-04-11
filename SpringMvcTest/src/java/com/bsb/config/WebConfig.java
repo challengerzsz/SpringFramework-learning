@@ -15,12 +15,22 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 public class WebConfig extends WebMvcConfigurerAdapter{
 
     //jsp视图解析器
+//    @Bean
+//    public ViewResolver viewResolver() {
+//        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+//        resolver.setPrefix("/WEB-INF/views/");
+//        resolver.setSuffix(".jsp");
+//        resolver.setExposeContextBeansAsAttributes(true);
+//        return resolver;
+//    }
+
+    //可保证JSTL的格式化和信息标签能够获得Locale对象以及Spring中的配置资源
     @Bean
     public ViewResolver viewResolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
         resolver.setPrefix("/WEB-INF/views/");
         resolver.setSuffix(".jsp");
-        resolver.setExposeContextBeansAsAttributes(true);
+        resolver.setViewClass(org.springframework.web.servlet.view.JstlView.class);
         return resolver;
     }
 

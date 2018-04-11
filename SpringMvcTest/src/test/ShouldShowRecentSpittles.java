@@ -39,4 +39,11 @@ public class ShouldShowRecentSpittles {
         }
         return spittles;
     }
+
+    @Test
+    public void shouldShowRegistration() throws Exception {
+        SpittleController controller = new SpittleController();
+        MockMvc mockMvc = standaloneSetup(controller).build();
+        mockMvc.perform(get("/spitter/register")).andExpect(view().name("registerForm"));
+    }
 }
