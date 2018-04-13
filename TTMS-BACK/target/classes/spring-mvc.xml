@@ -6,8 +6,30 @@
 
 
     <!-- 注解标签驱动开启-->
-    <!--<mvc:annotation-driven></mvc:annotation-driven>-->
-    <!--<mvc:default-servlet-handler />-->
+    <mvc:annotation-driven></mvc:annotation-driven>
+
+    <mvc:default-servlet-handler />
+
+    <!--一定需要的-->
+    <!--开启controller注解支持 -->
+    <!--注意事项请参考：http://jinnianshilongnian.iteye.com/blog/1762632 -->
+    <context:component-scan base-package="com.bsb"></context:component-scan>
+    <!-- 定义Spring MVC的拦截器 -->
+    <!--<mvc:interceptors>-->
+        <!--<mvc:interceptor>-->
+            <!--<mvc:mapping path="/**"/>-->
+            <!--<bean class="com.bsb.interceptor.UserInterceptor"/>-->
+
+        <!--&lt;!&ndash;</mvc:interceptor>&ndash;&gt;-->
+        <!--&lt;!&ndash;<mvc:interceptor>&ndash;&gt;-->
+            <!--&lt;!&ndash;<mvc:mapping path="/**"/>&ndash;&gt;-->
+            <!--&lt;!&ndash;<bean class="com.map.web.interceptor.FileTypeInterceptor" />&ndash;&gt;-->
+        <!--&lt;!&ndash;</mvc:interceptor>&ndash;&gt;-->
+        <!--&lt;!&ndash;<mvc:interceptor>&ndash;&gt;-->
+            <!--&lt;!&ndash;<mvc:mapping path="/**"/>&ndash;&gt;-->
+            <!--&lt;!&ndash;<bean class="com.map.web.interceptor.AdminInterceptor" />&ndash;&gt;-->
+        <!--</mvc:interceptor>-->
+    <!--</mvc:interceptors>-->
 
     <!--<context:annotation-config/>-->
 
@@ -18,7 +40,7 @@
     <bean id="defaultViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:order="1">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
         <property name="contentType" value="text/html" />
-        <property name="prefix" value="/WEB-INF/view" />
+        <property name="prefix" value="/WEB-INF/view/" />
         <property name="suffix" value=".jsp" />
     </bean>
 
@@ -40,9 +62,7 @@
         <!--</property>-->
     <!--</bean>-->
 
-    <!-- 开启controller注解支持 -->
-    <!-- 注意事项请参考：http://jinnianshilongnian.iteye.com/blog/1762632 -->
-    <!--<context:component-scan base-package="com.bsb"></context:component-scan>-->
+
 
     <!--<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">-->
         <!--&lt;!&ndash; 最大下载速度 &ndash;&gt;-->

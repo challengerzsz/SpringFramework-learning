@@ -1,13 +1,14 @@
 package com.bsb.pojo;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class User {
     //Account的类型
     private int id;
-    private String adminName;
+    private String userName;
     private String password;
-    private Integer userType;
+    private int userType;
     private String email;
     private String phone;
     private String question;
@@ -15,9 +16,9 @@ public class User {
     private Date createTime;
     private Date update_time;
 
-    public User(int id, String adminName, String password, Integer userType, String email, String phone, String question, String answer, Date createTime, Date update_time) {
+    public User(Integer id, String userName, String password, Integer userType, String email, String phone, String question, String answer, Timestamp createTime, Timestamp update_time) {
         this.id = id;
-        this.adminName = adminName;
+        this.userName = userName;
         this.password = password;
         this.userType = userType;
         this.email = email;
@@ -84,20 +85,20 @@ public class User {
         this.update_time = update_time;
     }
 
-    public Integer getUserType() {
+    public int getUserType() {
         return userType;
     }
 
-    public void setUserType(Integer userType) {
+    public void setUserType(int userType) {
         this.userType = userType;
     }
 
-    public String getAdminName() {
-        return adminName;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setAdminName(String adminName) {
-        this.adminName = adminName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {

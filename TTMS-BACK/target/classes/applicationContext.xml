@@ -24,7 +24,6 @@
     <!--3. spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
-        <!--<property name="configLocation" value="classpath:" />-->
     </bean>
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" >

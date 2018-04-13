@@ -39,6 +39,7 @@
           <element id="library" level="project" name="Maven: commons-logging:commons-logging:1.2" />
         </element>
       </element>
+      <element id="library" level="project" name="Maven: org.springframework:org.springframework.web.servlet:3.0.0.CI-331" />
       <element id="javaee-facet-resources" facet="TTMS-BACK/web/Web" />
     </root>
   </artifact>
