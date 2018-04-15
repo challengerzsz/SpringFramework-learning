@@ -1,11 +1,11 @@
 package com.bsb.common;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.io.Serializable;
 
-@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+@JsonSerialize(include =  JsonSerialize.Inclusion.NON_NULL)
 //序列化Json时 Key也会消失
 public class ServerResponse<T> implements Serializable{
 

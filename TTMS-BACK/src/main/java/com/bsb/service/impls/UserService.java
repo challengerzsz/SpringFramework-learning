@@ -19,6 +19,7 @@ public class UserService implements IUserService {
     @Override
     public ServerResponse<User> login(String username, String password) {
         int resultCount = userMapper.checkUserName(username);
+        System.out.println(resultCount + "是否查找到用户");
         if (resultCount == 0) {
             return ServerResponse.createByErrorMsg("用户名不存在");
         }
