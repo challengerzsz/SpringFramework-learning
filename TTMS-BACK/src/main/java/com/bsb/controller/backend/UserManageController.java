@@ -26,7 +26,7 @@ public class UserManageController {
         ServerResponse<User> response = userService.login(username, password);
         if (response.isSuccess()) {
             User user = response.getData();
-            if (user.getUserType() == UserType.Admin.getType()) {
+            if (user.getUsertype() == UserType.Admin.getType()) {
                 session.setAttribute(Const.CURRENT_USER, user);
                 return response;
             } else {

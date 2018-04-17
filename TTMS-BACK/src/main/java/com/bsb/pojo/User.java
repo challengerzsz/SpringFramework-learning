@@ -6,9 +6,9 @@ import java.util.Date;
 public class User {
     //Account的类型
     private int id;
-    private String userName;
+    private String username;
     private String password;
-    private int userType;
+    private int usertype;
     private String email;
     private String phone;
     private String question;
@@ -18,11 +18,11 @@ public class User {
 
     public User() { }
 
-    public User(Integer id, String userName, String password, Integer userType, String email, String phone, String question, String answer, Timestamp create_time, Timestamp update_time) {
+    public User(Integer id, String username, String password, Integer usertype, String email, String phone, String question, String answer, Timestamp create_time, Timestamp update_time) {
         this.id = id;
-        this.userName = userName;
+        this.username = username;
         this.password = password;
-        this.userType = userType;
+        this.usertype = usertype;
         this.email = email;
         this.phone = phone;
         this.question = question;
@@ -88,20 +88,20 @@ public class User {
         this.update_time = update_time;
     }
 
-    public int getUserType() {
-        return userType;
+    public int getUsertype() {
+        return usertype;
     }
 
-    public void setUserType(int userType) {
-        this.userType = userType;
+    public void setUsertype(int usertype) {
+        this.usertype = usertype;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {

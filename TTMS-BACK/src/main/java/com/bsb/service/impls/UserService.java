@@ -31,7 +31,7 @@ public class UserService implements IUserService {
 
         //todo MD5加密
         String md5Password = MD5Util.MD5EncodeUtf8(password);
-        User user = userMapper.selectLogin(username, password);
+        User user = userMapper.selectLogin(username, md5Password);
         if (user == null) {
             return ServerResponse.createByErrorMsg("密码错误");
         }
@@ -42,19 +42,20 @@ public class UserService implements IUserService {
 
     @Override
     public ServerResponse<String> register(User user) {
-        ServerResponse validResponse = this.checkValid(user.getUserName(), Const.USER_NAME);
+        ServerResponse validResponse = this.checkValid(user.getUsername(), Const.USER_NAME);
         if (!validResponse.isSuccess()) {
             return validResponse;
         }
-        validResponse = this.checkValid(user.getEmail(), Const.EMALI);
+        validResponse = this.checkValid(user.getEmail(), Const.EMAIL);
         if (!validResponse.isSuccess()) {
             return validResponse;
         }
-        user.setUserType(UserType.User.getType());
+        user.setUsertype(UserType.User.getType());
 
         //todo MD5加密
 
         user.setPassword(MD5Util.MD5EncodeUtf8(user.getPassword()));
+
         int resultCount = userMapper.insert(user);
 
         if (resultCount == 0) return ServerResponse.createByErrorMsg("注册失败");
@@ -67,11 +68,13 @@ public class UserService implements IUserService {
             //开始校验
             if (Const.USER_NAME.equals(type)) {
                 int resultCount = userMapper.checkUserName(str);
+
+                System.out.println("count" + resultCount);
                 if (resultCount > 0) {
                     return ServerResponse.createByErrorMsg("用户名已存在");
                 }
             }
-            if (Const.EMALI.equals(type)) {
+            if (Const.EMAIL.equals(type)) {
                 int resultCount = userMapper.checkEmail(str);
                 if (resultCount > 0) {
                     return ServerResponse.createByErrorMsg("email已存在");
@@ -168,7 +171,7 @@ public class UserService implements IUserService {
         updateUser.setId(user.getId());
         updateUser.setEmail(user.getEmail());
         updateUser.setPhone(user.getPhone());
-        updateUser.setUserType(user.getUserType());
+        updateUser.setUsertype(user.getUsertype());
         updateUser.setQuestion(user.getQuestion());
         updateUser.setAnswer(user.getAnswer());
 
