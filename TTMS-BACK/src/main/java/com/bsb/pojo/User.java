@@ -13,10 +13,12 @@ public class User {
     private String phone;
     private String question;
     private String answer;
-    private Date createTime;
+    private Date create_time;
     private Date update_time;
 
-    public User(Integer id, String userName, String password, Integer userType, String email, String phone, String question, String answer, Timestamp createTime, Timestamp update_time) {
+    public User() { }
+
+    public User(Integer id, String userName, String password, Integer userType, String email, String phone, String question, String answer, Timestamp create_time, Timestamp update_time) {
         this.id = id;
         this.userName = userName;
         this.password = password;
@@ -25,9 +27,10 @@ public class User {
         this.phone = phone;
         this.question = question;
         this.answer = answer;
-        this.createTime = createTime;
+        this.create_time = create_time;
         this.update_time = update_time;
     }
+
 
     public int getId() {
         return id;
@@ -69,12 +72,12 @@ public class User {
         this.answer = answer;
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public Date getCreate_time() {
+        return create_time;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setCreate_time(Date create_time) {
+        this.create_time = create_time;
     }
 
     public Date getUpdate_time() {
