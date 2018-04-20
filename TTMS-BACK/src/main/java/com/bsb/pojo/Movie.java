@@ -17,6 +17,8 @@ public class Movie {
     private Date create_time;
     private Date update_time;
 
+    public Movie() {}
+
     public Movie(Integer id, String name, String type, String lang, String comment, String image, String duration, Double price, Integer status, Timestamp create_time, Timestamp update_time) {
         this.id = id;
         this.name = name;
@@ -31,22 +33,6 @@ public class Movie {
         this.update_time = update_time;
     }
 
-
-    public Date getCreate_time() {
-        return create_time;
-    }
-
-    public void setCreate_time(Timestamp create_time) {
-        this.create_time = create_time;
-    }
-
-    public Date getUpdate_time() {
-        return update_time;
-    }
-
-    public void setUpdate_time(Timestamp update_time) {
-        this.update_time = update_time;
-    }
 
     public int getId() {
         return id;
@@ -118,5 +104,21 @@ public class Movie {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public Date getCreate_time() {
+        return create_time;
+    }
+
+    public void setCreate_time(Date create_time) {
+        this.create_time = create_time;
+    }
+
+    public Date getUpdate_time() {
+        return update_time;
+    }
+
+    public void setUpdate_time(Date update_time) {
+        this.update_time = update_time;
     }
 }

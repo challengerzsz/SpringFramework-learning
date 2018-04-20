@@ -105,38 +105,38 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.bsb.pojo.Movie" >
-        update user_table
+    <update id="updateMovie" parameterType="com.bsb.pojo.Movie" >
+        update movie_table
         <set >
-            <if test="username != null" >
-                username = #{username,jdbcType=VARCHAR},
+            <if test="type != null" >
+                type = #{type,jdbcType=VARCHAR},
             </if>
-            <if test="password != null" >
-                password = #{password,jdbcType=VARCHAR},
+            <if test="lang != null" >
+                lang = #{lang,jdbcType=VARCHAR},
             </if>
-            <if test="email != null" >
-                email = #{email,jdbcType=VARCHAR},
+            <if test="comment != null" >
+                comment = #{comment,jdbcType=VARCHAR},
             </if>
-            <if test="phone != null" >
-                phone = #{phone,jdbcType=VARCHAR},
+            <if test="image != null" >
+                image = #{image,jdbcType=VARCHAR},
             </if>
-            <if test="question != null" >
-                question = #{question,jdbcType=VARCHAR},
+            <if test="duration != null" >
+                duration = #{duration,jdbcType=VARCHAR},
             </if>
-            <if test="answer != null" >
-                answer = #{answer,jdbcType=VARCHAR},
+            <if test="price != null" >
+                price = #{price,jdbcType=DOUBLE},
             </if>
-            <if test="usertype != null" >
-                usertype = #{usertype,jdbcType=INTEGER},
+            <if test="status != null" >
+                status = #{status,jdbcType=INTEGER},
             </if>
             <if test="create_time != null" >
                 create_time = #{create_time,jdbcType=TIMESTAMP},
             </if>
-            <if test="updateTime != null" >
+            <if test="update_time != null" >
                 update_time = now(),
             </if>
         </set>
-        where id = #{id,jdbcType=INTEGER}
+        where name = #{name,jdbcType= VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.bsb.pojo.Movie" >
     update user_table

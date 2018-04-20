@@ -14,4 +14,8 @@ public interface IMoviesService {
     ServerResponse<String> addMovie(Movie movie);
 
     ServerResponse<String> checkValid(String name);
+
+    ServerResponse<String> deleteMovieByName(String name);
+
+    ServerResponse<String> updateMovie(Movie movie);
 }

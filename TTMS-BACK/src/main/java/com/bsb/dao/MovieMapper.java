@@ -1,6 +1,7 @@
 package com.bsb.dao;
 
 import com.bsb.pojo.Movie;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -17,4 +18,9 @@ public interface MovieMapper {
 
     @Select("select count(1) from movie_table where name = #{name}")
     int checkName(String name);
+
+    @Delete("delete from movie_table where name = #{name}")
+    int deleteByName(String name);
+
+    int updateMovie(Movie movie);
 }

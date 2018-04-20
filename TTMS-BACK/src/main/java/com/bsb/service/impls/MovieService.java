@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class MoviesService implements IMoviesService {
+public class MovieService implements IMoviesService {
 
     @Autowired
     private MovieMapper movieMapper;
@@ -36,7 +36,10 @@ public class MoviesService implements IMoviesService {
 
     @Override
     public ServerResponse<String> addMovie(Movie movie) {
-        //todo 校验影片是否存在
+        ServerResponse response = this.checkValid(movie.getName());
+        if (!response.isSuccess()) {
+            return ServerResponse.createByErrorMsg("影片已存在，添加影片失败");
+        }
         int resultCount = movieMapper.insert(movie);
         if (resultCount == 0) {
             return ServerResponse.createByErrorMsg("添加影片失败");
@@ -51,5 +54,31 @@ public class MoviesService implements IMoviesService {
             return ServerResponse.createBySuccess();
         }
         return ServerResponse.createByErrorMsg("影片已存在");
+    }
+
+    @Override
+    public ServerResponse<String> deleteMovieByName(String name) {
+        ServerResponse response = this.checkValid(name);
+        if (response.isSuccess()) {
+            return ServerResponse.createByErrorMsg("影片不存在");
+        }
+        int resultCount = movieMapper.deleteByName(name);
+        if (resultCount == 0) {
+            return ServerResponse.createByErrorMsg("删除失败");
+        }
+        return ServerResponse.createBySuccessMsg("删除成功");
+    }
+
+    @Override
+    public ServerResponse<String> updateMovie(Movie movie) {
+        ServerResponse response = this.checkValid(movie.getName());
+        if (response.isSuccess()) {
+            return ServerResponse.createByErrorMsg("影片不存在");
+        }
+        int resultCount = movieMapper.updateMovie(movie);
+        if (resultCount == 0) {
+            return ServerResponse.createByErrorMsg("更新影片信息失败");
+        }
+        return ServerResponse.createBySuccessMsg("更新影片信息成功");
     }
 }
