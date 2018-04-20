@@ -16,7 +16,6 @@ public class User {
     private Date create_time;
     private Date update_time;
 
-    public User() { }
 
     public User(Integer id, String username, String password, Integer usertype, String email, String phone, String question, String answer, Timestamp create_time, Timestamp update_time) {
         this.id = id;
@@ -29,6 +28,10 @@ public class User {
         this.answer = answer;
         this.create_time = create_time;
         this.update_time = update_time;
+    }
+
+    public User() {
+
     }
 
 

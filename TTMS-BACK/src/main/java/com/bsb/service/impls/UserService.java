@@ -29,7 +29,6 @@ public class UserService implements IUserService {
             return ServerResponse.createByErrorMsg("用户名不存在");
         }
 
-        //todo MD5加密
         String md5Password = MD5Util.MD5EncodeUtf8(password);
         User user = userMapper.selectLogin(username, md5Password);
         if (user == null) {
