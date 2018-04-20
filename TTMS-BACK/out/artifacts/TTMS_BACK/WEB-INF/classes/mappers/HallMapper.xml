@@ -1,45 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.bsb.dao.MovieMapper" >
-    <resultMap id="BaseResultMap" type="com.bsb.pojo.Movie" >
+<mapper namespace="com.bsb.dao.HallMapper" >
+    <resultMap id="BaseResultMap" type="com.bsb.pojo.Hall" >
         <constructor>
             <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-            <arg column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
-            <arg column="type" jdbcType="VARCHAR" javaType="java.lang.String" />
-            <arg column="lang" jdbcType="INTEGER" javaType="java.lang.String" />
+            <arg column="hallName" jdbcType="VARCHAR" javaType="java.lang.String" />
             <arg column="comment" jdbcType="VARCHAR" javaType="java.lang.String" />
-            <arg column="image" jdbcType="VARCHAR" javaType="java.lang.String" />
-            <arg column="duration" jdbcType="VARCHAR" javaType="java.lang.String" />
-            <arg column="price" jdbcType="VARCHAR" javaType="java.lang.Double" />
+            <arg column="seatCount" jdbcType="INTEGER" javaType="java.lang.Integer" />
             <arg column="status" jdbcType="INTEGER" javaType="java.lang.Integer" />
-            <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-            <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+            <arg column="onShowMovie" jdbcType="VARCHAR" javaType="java.lang.String" />
+            <arg column="createTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+            <arg column="updateTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
         </constructor>
     </resultMap>
     <sql id="Base_Column_List" >
-    id, name, type, lang, comment, image, duration, price, status, create_time, update_time
+    id, hallName, comment, seatCount, status, onShowMovie, createTime, updateTime
     </sql>
     <!--<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >-->
-        <!--select-->
-        <!--<include refid="Base_Column_List" />-->
-        <!--from movie_table-->
-        <!--where id = #{id,jdbcType=INTEGER}-->
+    <!--select-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from movie_table-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
     <!--</select>-->
 
     <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >-->
     <!--delete from movie_table-->
     <!--where id = #{id,jdbcType=INTEGER}-->
     <!--</delete>-->
-    <insert id="insert" parameterType="com.bsb.pojo.Movie" >
-    insert into movie_table (id, name, type, lang, comment, image, duration, price, status, create_time, update_time)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR},
-     #{lang,jdbcType=INTEGER},
-      #{comment,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, #{duration,jdbcType=VARCHAR},
-      #{price,jdbcType=DOUBLE}, #{status,jdbcType=INTEGER}, now(),
-      now())
+    <insert id="insert" parameterType="com.bsb.pojo.Hall" >
+    insert into hall_table (id, hall_name, comment, seat_count, status, on_show_movie, create_time, update_time)
+    values (#{id,jdbcType=INTEGER}, #{hallName,jdbcType=VARCHAR}, #{comment,jdbcType=VARCHAR},
+     #{seatCount,jdbcType=INTEGER},
+      #{status,jdbcType=INTEGER}, #{onShowMovie,jdbcType=VARCHAR}, now(),now())
     </insert>
-    <insert id="insertSelective" parameterType="com.bsb.pojo.Movie" >
-        insert into movie_table
+    <insert id="insertSelective" parameterType="com.bsb.pojo.Hall" >
+        insert into hall_table
         <trim prefix="(" suffix=")" suffixOverrides="," >
             <if test="id != null" >
                 id,
@@ -105,8 +100,8 @@
             </if>
         </trim>
     </insert>
-    <update id="updateMovie" parameterType="com.bsb.pojo.Movie" >
-        update movie_table
+    <update id="updateMovie" parameterType="com.bsb.pojo.Hall" >
+        update hall_table
         <set >
             <if test="type != null" >
                 type = #{type,jdbcType=VARCHAR},
@@ -138,8 +133,8 @@
         </set>
         where name = #{name,jdbcType= VARCHAR}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.bsb.pojo.Movie" >
-    update user_table
+    <update id="updateByPrimaryKey" parameterType="com.bsb.pojo.Hall" >
+    update hall_table
     set username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},

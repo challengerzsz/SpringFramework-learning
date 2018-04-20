@@ -51,7 +51,6 @@ public class UserService implements IUserService {
         }
         user.setUsertype(UserType.User.getType());
 
-        //todo MD5加密
 
         user.setPassword(MD5Util.MD5EncodeUtf8(user.getPassword()));
 
