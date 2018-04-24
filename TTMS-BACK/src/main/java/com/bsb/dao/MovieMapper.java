@@ -2,14 +2,15 @@ package com.bsb.dao;
 
 import com.bsb.pojo.Movie;
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
 public interface MovieMapper {
 
-    @Select("select * from movie_table limit 0,5")
-    List<Movie> showMovies();
+    @Select("select * from movie_table limit #{start} , #{end}")
+    List<Movie> showMovies(@Param("start") int start, @Param("end") int end);
 
     @Select("select * from movie_table where name = #{name}")
     Movie getMovieInfo(String name);

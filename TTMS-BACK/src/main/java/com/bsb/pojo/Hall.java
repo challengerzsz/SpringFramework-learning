@@ -1,30 +1,34 @@
 package com.bsb.pojo;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 public class Hall {
     private int id;
-    private String hallName;
+    private String hall_name;
     private String comment;
-    private int seatCount;
+    private int seat_count;
+    private int hall_row;
+    private int hall_column;
     private int status;
-    private String onShowMovie;
-    private Date createTime;
-    private Date updateTime;
+    private String on_show_movie;
+    private Date create_time;
+    private Date update_time;
 
     public Hall() {
     }
 
-    public Hall(Integer id, String hallName, String comment, Integer seatCount, Integer status, String onShowMovie, Timestamp createTime, Timestamp updateTime) {
+
+    public Hall(int id, String hall_name, String comment, int seat_count, int hall_row, int hall_column, int status, String on_show_movie, Date create_time, Date update_time) {
         this.id = id;
-        this.hallName = hallName;
+        this.hall_name = hall_name;
         this.comment = comment;
-        this.seatCount = seatCount;
+        this.seat_count = seat_count;
+        this.hall_row = hall_row;
+        this.hall_column = hall_column;
         this.status = status;
-        this.onShowMovie = onShowMovie;
-        this.createTime = createTime;
-        this.updateTime = updateTime;
+        this.on_show_movie = on_show_movie;
+        this.create_time = create_time;
+        this.update_time = update_time;
     }
 
     public int getId() {
@@ -35,12 +39,12 @@ public class Hall {
         this.id = id;
     }
 
-    public String getHallName() {
-        return hallName;
+    public String getHall_name() {
+        return hall_name;
     }
 
-    public void setHallName(String hallName) {
-        this.hallName = hallName;
+    public void setHall_name(String hall_name) {
+        this.hall_name = hall_name;
     }
 
     public String getComment() {
@@ -51,12 +55,28 @@ public class Hall {
         this.comment = comment;
     }
 
-    public int getSeatCount() {
-        return seatCount;
+    public int getSeat_count() {
+        return seat_count;
     }
 
-    public void setSeatCount(int seatCount) {
-        this.seatCount = seatCount;
+    public void setSeat_count(int seat_count) {
+        this.seat_count = seat_count;
+    }
+
+    public int getHall_row() {
+        return hall_row;
+    }
+
+    public void setHall_row(int hall_row) {
+        this.hall_row = hall_row;
+    }
+
+    public int getHall_column() {
+        return hall_column;
+    }
+
+    public void setHall_column(int hall_column) {
+        this.hall_column = hall_column;
     }
 
     public int getStatus() {
@@ -67,11 +87,27 @@ public class Hall {
         this.status = status;
     }
 
-    public String getOnShowMovie() {
-        return onShowMovie;
+    public String getOn_show_movie() {
+        return on_show_movie;
     }
 
-    public void setOnShowMovie(String onShowMovie) {
-        this.onShowMovie = onShowMovie;
+    public void setOn_show_movie(String on_show_movie) {
+        this.on_show_movie = on_show_movie;
+    }
+
+    public Date getCreate_time() {
+        return create_time;
+    }
+
+    public void setCreate_time(Date create_time) {
+        this.create_time = create_time;
+    }
+
+    public Date getUpdate_time() {
+        return update_time;
+    }
+
+    public void setUpdate_time(Date update_time) {
+        this.update_time = update_time;
     }
 }

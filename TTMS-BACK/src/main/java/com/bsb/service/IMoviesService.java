@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IMoviesService {
 
-    ServerResponse<List<Movie>> showMovies();
+    ServerResponse<List<Movie>> showMovies(int start, int end);
 
     ServerResponse<Movie> getMovieInfo(String name);
 

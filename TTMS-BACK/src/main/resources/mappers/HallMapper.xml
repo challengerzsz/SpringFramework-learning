@@ -4,17 +4,20 @@
     <resultMap id="BaseResultMap" type="com.bsb.pojo.Hall" >
         <constructor>
             <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-            <arg column="hallName" jdbcType="VARCHAR" javaType="java.lang.String" />
+            <arg column="hall_name" jdbcType="VARCHAR" javaType="java.lang.String" />
             <arg column="comment" jdbcType="VARCHAR" javaType="java.lang.String" />
-            <arg column="seatCount" jdbcType="INTEGER" javaType="java.lang.Integer" />
+            <arg column="seat_count" jdbcType="INTEGER" javaType="java.lang.Integer" />
+            <arg column="hall_row" jdbcType="INTEGER" javaType="java.lang.Integer" />
+            <arg column="hall_column" jdbcType="INTEGER" javaType="java.lang.Integer" />
             <arg column="status" jdbcType="INTEGER" javaType="java.lang.Integer" />
-            <arg column="onShowMovie" jdbcType="VARCHAR" javaType="java.lang.String" />
-            <arg column="createTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-            <arg column="updateTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+            <arg column="on_show_movie" jdbcType="VARCHAR" javaType="java.lang.String" />
+            <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+            <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
         </constructor>
+
     </resultMap>
     <sql id="Base_Column_List" >
-    id, hallName, comment, seatCount, status, onShowMovie, createTime, updateTime
+    id, hall_name, comment, seat_count, hall_row, hall_column, status, on_show_movie, create_time, update_time
     </sql>
     <!--<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >-->
     <!--select-->
@@ -28,9 +31,9 @@
     <!--where id = #{id,jdbcType=INTEGER}-->
     <!--</delete>-->
     <insert id="insert" parameterType="com.bsb.pojo.Hall" >
-    insert into hall_table (id, hall_name, comment, seat_count, status, on_show_movie, create_time, update_time)
+    insert into hall_table (id, hall_name, comment, seat_count,  hall_row, hall_column, status, on_show_movie, create_time, update_time)
     values (#{id,jdbcType=INTEGER}, #{hallName,jdbcType=VARCHAR}, #{comment,jdbcType=VARCHAR},
-     #{seatCount,jdbcType=INTEGER},
+     #{seatCount,jdbcType=INTEGER}, #{hallRow,jdbcType=INTEGER}, #{hallColumn,jdbcType=INTEGER},
       #{status,jdbcType=INTEGER}, #{onShowMovie,jdbcType=VARCHAR}, now(),now())
     </insert>
     <insert id="insertSelective" parameterType="com.bsb.pojo.Hall" >
@@ -100,38 +103,32 @@
             </if>
         </trim>
     </insert>
-    <update id="updateMovie" parameterType="com.bsb.pojo.Hall" >
+    <update id="updateHall" parameterType="com.bsb.pojo.Hall" >
         update hall_table
         <set >
-            <if test="type != null" >
-                type = #{type,jdbcType=VARCHAR},
-            </if>
-            <if test="lang != null" >
-                lang = #{lang,jdbcType=VARCHAR},
-            </if>
             <if test="comment != null" >
                 comment = #{comment,jdbcType=VARCHAR},
             </if>
-            <if test="image != null" >
-                image = #{image,jdbcType=VARCHAR},
+            <if test="seat_count != null" >
+                seat_count = #{seat_count,jdbcType=INTEGER},
             </if>
-            <if test="duration != null" >
-                duration = #{duration,jdbcType=VARCHAR},
+            <if test="hall_row != null" >
+                hall_row = #{hall_row,jdbcType=INTEGER},
             </if>
-            <if test="price != null" >
-                price = #{price,jdbcType=DOUBLE},
+            <if test="hall_column != null" >
+                hall_column = #{hall_column,jdbcType=INTEGER},
             </if>
             <if test="status != null" >
                 status = #{status,jdbcType=INTEGER},
             </if>
-            <if test="create_time != null" >
-                create_time = #{create_time,jdbcType=TIMESTAMP},
+            <if test="on_show_movie != null" >
+                on_show_movie = #{on_show_movie,jdbcType=VARCHAR},
             </if>
             <if test="update_time != null" >
                 update_time = now(),
             </if>
         </set>
-        where name = #{name,jdbcType= VARCHAR}
+        where hall_name = #{hall_name,jdbcType= VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.bsb.pojo.Hall" >
     update hall_table

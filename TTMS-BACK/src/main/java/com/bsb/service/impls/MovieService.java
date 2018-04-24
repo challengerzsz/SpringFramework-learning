@@ -16,8 +16,8 @@ public class MovieService implements IMoviesService {
     private MovieMapper movieMapper;
 
     @Override
-    public ServerResponse<List<Movie>> showMovies() {
-        List<Movie> movies = movieMapper.showMovies();
+    public ServerResponse<List<Movie>> showMovies(int start, int end) {
+        List<Movie> movies = movieMapper.showMovies(start, end);
         if (movies == null) {
             return ServerResponse.createByErrorMsg("无影片信息");
         }

@@ -36,11 +36,6 @@ public class ServerResponse<T> implements Serializable{
         this.msg = msg;
     }
 
-//    public static void main(String[] args) {
-//        ServerResponse serverResponse1 = new ServerResponse(1, new Object());
-//        ServerResponse serverResponse2 = new ServerResponse(2, "abc");
-//        System.out.println("11");
-//    }
 
     @JsonIgnore
     //不在Json序列化中

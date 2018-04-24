@@ -30,10 +30,10 @@ public class MovieController {
         return movieService.checkValid(name);
     }
 
-    @RequestMapping(value = "show_movies.do", method = RequestMethod.GET)
+    @RequestMapping(value = "show_movies.do", method = RequestMethod.POST)
     @ResponseBody
-    public ServerResponse<List<Movie>> showMovies() {
-        return movieService.showMovies();
+    public ServerResponse<List<Movie>> showMovies(int start, int end) {
+        return movieService.showMovies(start, end);
     }
 
     @RequestMapping(value = "get_movie_info.do", method = RequestMethod.POST)
