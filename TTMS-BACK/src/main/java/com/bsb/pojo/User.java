@@ -3,11 +3,14 @@ package com.bsb.pojo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
 
 @JsonSerialize(include =  JsonSerialize.Inclusion.NON_NULL)
-public class User {
+public class User implements Serializable {
+//    private static final long serialVersionUID = 6977402643848375753L;
+
     //Account的类型
     private int id;
     private String username;
