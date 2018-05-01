@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 
 public interface HallMapper {
+
     int insert(Hall hall);
 
     @Select("select count(1) from hall_table where hall_name = #{hallName}")
@@ -23,4 +24,5 @@ public interface HallMapper {
 
     @Select("select * from hall_table where hall_name = #{hallName}")
     Hall getInfoByHallName(String hallName);
+
 }

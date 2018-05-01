@@ -12,11 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
 import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping(value = "/user/")
 public class UserController {
+
 
     @Autowired
     private IUserService userService;
@@ -117,6 +119,7 @@ public class UserController {
         }
         return userService.getInformation(currentUser.getId());
     }
+
 }
 
 

@@ -14,7 +14,6 @@
             <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
             <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
         </constructor>
-
     </resultMap>
     <sql id="Base_Column_List" >
     id, hall_name, comment, seat_count, hall_row, hall_column, status, on_show_movie, create_time, update_time

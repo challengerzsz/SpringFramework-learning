@@ -1,8 +1,12 @@
 package com.bsb.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import java.sql.Timestamp;
 import java.util.Date;
 
+@JsonSerialize(include =  JsonSerialize.Inclusion.NON_NULL)
 public class Movie {
 
     private int id;
@@ -14,7 +18,9 @@ public class Movie {
     private String duration;
     private double price;
     private int status;
+    @JsonIgnore
     private Date create_time;
+    @JsonIgnore
     private Date update_time;
 
     public Movie() {}

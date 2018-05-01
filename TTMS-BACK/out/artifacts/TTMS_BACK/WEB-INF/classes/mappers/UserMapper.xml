@@ -17,7 +17,7 @@
     </resultMap>
     <sql id="Base_Column_List" >
     id, username, password, usertype, email, phone, question, answer, create_time, update_time
-  </sql>
+    </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
         select
         <include refid="Base_Column_List" />
@@ -25,20 +25,20 @@
         where id = #{id,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from user_table
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
+      delete from user_table
+      where id = #{id,jdbcType=INTEGER}
+    </delete>
     <insert id="insert" parameterType="com.bsb.pojo.User" >
-    insert into user_table (id, username, password,
+      insert into user_table (id, username, password,
       usertype,email, phone, question,
       answer, create_time,
       update_time)
-    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
-     #{usertype,jdbcType=INTEGER},
+      values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+      #{usertype,jdbcType=INTEGER},
       #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{question,jdbcType=VARCHAR},
       #{answer,jdbcType=VARCHAR}, now(),
       now())
-  </insert>
+    </insert>
     <insert id="insertSelective" parameterType="com.bsb.pojo.User" >
         insert into user_table
         <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -108,6 +108,7 @@
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.bsb.pojo.User" >
         update user_table
+        <if test="userName != null and userName != '' and userName like concat('%', #{userName}, '%')"  ></if>
         <set >
             <if test="username != null" >
                 username = #{username,jdbcType=VARCHAR},
@@ -140,8 +141,8 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.bsb.pojo.User" >
-    update user_table
-    set username = #{username,jdbcType=VARCHAR},
+      update user_table
+      set username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
@@ -150,12 +151,6 @@
       usertype = #{usertype,jdbcType=INTEGER},
       create_time = #{create_time,jdbcType=TIMESTAMP},
       update_time = now()
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-
-
-
-
-
-
+      where id = #{id,jdbcType=INTEGER}
+    </update>
 </mapper>

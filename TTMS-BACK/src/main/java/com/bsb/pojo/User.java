@@ -1,8 +1,12 @@
 package com.bsb.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import java.sql.Timestamp;
 import java.util.Date;
 
+@JsonSerialize(include =  JsonSerialize.Inclusion.NON_NULL)
 public class User {
     //Account的类型
     private int id;
@@ -13,7 +17,9 @@ public class User {
     private String phone;
     private String question;
     private String answer;
+    @JsonIgnore
     private Date create_time;
+    @JsonIgnore
     private Date update_time;
 
 

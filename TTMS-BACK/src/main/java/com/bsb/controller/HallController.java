@@ -3,7 +3,6 @@ package com.bsb.controller;
 import com.bsb.common.ServerResponse;
 import com.bsb.pojo.Hall;
 import com.bsb.service.IHallService;
-import javafx.scene.effect.Light;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,5 +1,7 @@
 package com.bsb.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Date;
 
 public class Hall {
@@ -11,7 +13,9 @@ public class Hall {
     private int hall_column;
     private int status;
     private String on_show_movie;
+    @JsonIgnore
     private Date create_time;
+    @JsonIgnore
     private Date update_time;
 
     public Hall() {
