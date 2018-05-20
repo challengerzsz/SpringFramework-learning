@@ -59,4 +59,20 @@ public class UserController {
 
         return response;
     }
+
+
+    @RequestMapping(value = "update_information.do", method = RequestMethod.POST)
+    public ServerResponse<User> updateInformation(HttpSession session, User user) {
+        User currentUser = (User) session.getAttribute(Const.CURRENT_USER);
+        if (currentUser == null) {
+            return ServerResponse.createByErrorMsg("用户未登录");
+        }
+        user.setId(currentUser.getId());
+        ServerResponse<User> response = userService.updateInformation(user);
+        if (response.isSuccess()) {
+            session.setAttribute(Const.CURRENT_USER, response.getData());
+        }
+        return response;
+    }
+
 }

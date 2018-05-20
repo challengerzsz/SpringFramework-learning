@@ -1,6 +1,5 @@
 package com.ylxt.pojo;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 public class User {
@@ -14,18 +13,6 @@ public class User {
     private Integer type;
     private Date create_time;
     private Date update_time;
-
-    public User(Integer id, String number, String username, String password, String phone, String email, Integer type, Timestamp create_time, Timestamp update_time) {
-        this.id = id;
-        this.number = number;
-        this.username = username;
-        this.password = password;
-        this.phone = phone;
-        this.email = email;
-        this.type = type;
-        this.create_time = create_time;
-        this.update_time = update_time;
-    }
 
     public int getId() {
         return id;

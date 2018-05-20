@@ -9,4 +9,5 @@ public interface IUserService {
 
     ServerResponse<String> resetPassword(String number, String newPassword);
 
+    ServerResponse<User> updateInformation(User user);
 }

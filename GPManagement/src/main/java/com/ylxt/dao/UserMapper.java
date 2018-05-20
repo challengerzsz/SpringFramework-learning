@@ -11,8 +11,21 @@ public interface UserMapper {
     int checkUserNumber(String number);
 
     @Select("SELECT * FROM user_table WHERE number = #{number} and password = #{password}")
-    User login(@Param("number") String number, @Param("password") String password);
+    User login(@Param("number") String number,
+               @Param("password") String password);
 
     @Update("UPDATE user_table SET password = #{newPassword} WHERE number = #{number}")
-    int resetPassword(@Param("number") String number, @Param("newPassword") String newPassword);
+    int resetPassword(@Param("number") String number,
+                      @Param("newPassword") String newPassword);
+
+    @Select("SELECT COUNT(1) FROM USER_TABLE WHERE email = #{email}")
+    int checkEmail(String email);
+
+    @Select("SELECT COUNT(1) FROM USER_TABLE WHERE phone = #{phone}")
+    int checkPhone(String phone);
+
+    @Update("UPDATE user_table SET phone = #{phone}, email = #{email}, update_time = now() WHERE number = #{number}")
+    int updateUser(@Param("number") String number,
+                   @Param("phone") String phone,
+                   @Param("email") String email);
 }
