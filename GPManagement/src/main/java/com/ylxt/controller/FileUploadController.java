@@ -79,6 +79,8 @@ public class FileUploadController {
             }
         }
 
+        fileService.saveFilePath(type, uploadFilesPath, user.getNumber());
+
         return ServerResponse.createBySuccess("文件上传成功", uploadFilesPath);
     }
 }

@@ -4,5 +4,5 @@ import com.ylxt.common.ServerResponse;
 
 public interface IFileService {
 
-    ServerResponse<String> saveFilePath(String saveFilePath, String number);
+    ServerResponse<String> saveFilePath(int type, String saveFilePath, String number);
 }
