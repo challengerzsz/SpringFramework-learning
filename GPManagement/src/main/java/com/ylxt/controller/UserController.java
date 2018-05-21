@@ -45,14 +45,10 @@ public class UserController {
 
 
     @RequestMapping(value = "reset_password.do", method = RequestMethod.POST)
-    public ServerResponse<String> resetPassword(HttpSession session, String newPassword, String confirmPassword) {
+    public ServerResponse<String> resetPassword(HttpSession session, String newPassword) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
             return ServerResponse.createByErrorMsg("用户未登录");
-        }
-
-        if (!newPassword.equals(confirmPassword)) {
-            return ServerResponse.createByErrorMsg("新密码与确认密码不符");
         }
 
         ServerResponse<String> response = userService.resetPassword(user.getNumber(), newPassword);
@@ -62,13 +58,14 @@ public class UserController {
 
 
     @RequestMapping(value = "update_information.do", method = RequestMethod.POST)
-    public ServerResponse<User> updateInformation(HttpSession session, User user) {
+    public ServerResponse<User> updateInformation(HttpSession session, String phone, String email) {
         User currentUser = (User) session.getAttribute(Const.CURRENT_USER);
         if (currentUser == null) {
             return ServerResponse.createByErrorMsg("用户未登录");
         }
-        user.setId(currentUser.getId());
-        ServerResponse<User> response = userService.updateInformation(user);
+
+
+        ServerResponse<User> response = userService.updateInformation(currentUser, phone, email);
         if (response.isSuccess()) {
             session.setAttribute(Const.CURRENT_USER, response.getData());
         }

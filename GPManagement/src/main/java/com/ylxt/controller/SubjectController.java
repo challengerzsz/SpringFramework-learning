@@ -21,20 +21,6 @@ public class SubjectController {
     @Autowired
     private ISubjectService subjectService;
 
-    @RequestMapping(value = "get_selected_subject.do", method = RequestMethod.POST)
-    public ServerResponse<Subject> getSelectedTask(HttpSession session) {
-        User user = (User) session.getAttribute(Const.CURRENT_USER);
-        if (user == null) {
-            return ServerResponse.createByError();
-        }
-
-        //todo 查询自己已选信息传入什么参数
-        ServerResponse<Subject> response = subjectService.getSelectedTask();
-
-
-
-        return null;
-    }
 
     @RequestMapping(value = "publish_subject.do", method = RequestMethod.POST)
     public ServerResponse<String> publishTask(HttpSession session, Subject newTask) {
@@ -72,10 +58,10 @@ public class SubjectController {
         newSubject.setStudentName(user.getUsername());
         ServerResponse<String> response = subjectService.declareSubject(newSubject);
         if (response.isSuccess()) {
-            return response;
+            return ServerResponse.createBySuccessMsg("申报课题成功");
         }
 
-        return ServerResponse.createByErrorMsg("申报课题失败");
+        return response;
     }
 
     @RequestMapping(value = "refresh_audit_list.do", method = RequestMethod.POST)
@@ -90,9 +76,50 @@ public class SubjectController {
         }
 
         ServerResponse<List<Subject>> response = subjectService.refreshAuditList(user.getUsername());
-        if (!response.isSuccess()) {
+        if (response.isSuccess()) {
             return ServerResponse.createByErrorMsg("查询失败");
         }
+
+        return response;
+    }
+
+    /**
+     * 审核申报课题
+     * @param id 传入的学生申报课题的id
+     * @param answer 拒绝 -1, 通过 1
+     * @return
+     */
+    @RequestMapping(value = "confirm_subject.do", method = RequestMethod.POST)
+    public ServerResponse<String> confirmSubject(HttpSession session, int id, int answer) {
+
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if (user == null) {
+            return ServerResponse.createByErrorMsg("未登录");
+        }
+        if (user.getType() != 1) {
+            return ServerResponse.createByErrorMsg("无权限进行审核");
+        }
+
+        ServerResponse<String> response = subjectService.confirmSubject(id, answer);
+        if (response.isSuccess()) {
+            return ServerResponse.createBySuccessMsg("审核成功");
+        }
+
+        return response;
+    }
+
+    @RequestMapping(value = "get_declare_subject.do", method = RequestMethod.POST)
+    public ServerResponse<Subject> getDeclareSubject(HttpSession session) {
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if (user == null) {
+            return ServerResponse.createByErrorMsg("未登录");
+        }
+
+        if (user.getType() != 2) {
+            return ServerResponse.createByErrorMsg("仅学生有此选项");
+        }
+
+        ServerResponse<Subject> response = subjectService.getDeclareSubject(user.getNumber());
 
         return response;
     }

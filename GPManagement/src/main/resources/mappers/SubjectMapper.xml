@@ -19,7 +19,7 @@
 
     <insert id="declareSubject" parameterType="com.ylxt.pojo.Subject">
         INSERT INTO declaration_subject_table VALUES
-        (null , #{studentName}, #{number}, #{subjectName}, #{topicSource}, #{subjectType}, #{topicType}, #{topicPaper}, #{ability}, #{target}, #{guideTeacher}, null )
+        (null , #{studentName}, #{number}, #{subjectName}, #{topicSource}, #{subjectType}, #{topicType}, #{topicPaper}, #{ability}, #{target}, #{guideTeacher}, null, 0 )
     </insert>
 
 </mapper>

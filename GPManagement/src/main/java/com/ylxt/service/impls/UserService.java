@@ -46,21 +46,21 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public ServerResponse<User> updateInformation(User user) {
-        int emailResultCount = userMapper.checkEmail(user.getEmail());
-        int phoneResultCount = userMapper.checkPhone(user.getPhone());
+    public ServerResponse<User> updateInformation(User user, String phone, String email) {
+        int emailResultCount = userMapper.checkEmail(phone);
+        int phoneResultCount = userMapper.checkPhone(email);
+
         if (emailResultCount > 0 || phoneResultCount > 0) {
             return ServerResponse.createBySuccessMsg("email或phone已存在，更新用户信息失败");
         }
 
-        User updateUser = new User();
-        updateUser.setPhone(user.getPhone());
-        updateUser.setEmail(user.getEmail());
 
-        int updateCount = userMapper.updateUser(updateUser.getNumber(), updateUser.getPhone(), user.getEmail());
+        int updateCount = userMapper.updateUser(user.getNumber(), phone, email);
 
         if (updateCount > 0) {
-            return ServerResponse.createBySuccess("更新个人信息成功", updateUser);
+            user.setPhone(phone);
+            user.setEmail(email);
+            return ServerResponse.createBySuccess("更新个人信息成功", user);
         }
 
         return ServerResponse.createByErrorMsg("更新个人信息失败");
