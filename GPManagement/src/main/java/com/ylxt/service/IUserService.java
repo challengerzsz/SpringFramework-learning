@@ -11,5 +11,5 @@ public interface IUserService {
 
     ServerResponse<User> updateInformation(User user, String phone, String email);
 
-
+    ServerResponse<User> getGuideTeacher(String number);
 }

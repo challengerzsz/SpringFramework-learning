@@ -2,7 +2,7 @@ package com.ylxt.service.impls;
 
 import com.ylxt.common.ServerResponse;
 
-import com.ylxt.dao.SubjectMapper;
+import com.ylxt.dao.ISubjectMapper;
 import com.ylxt.pojo.Subject;
 import com.ylxt.service.ISubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +14,17 @@ import java.util.List;
 public class SubjectService implements ISubjectService {
 
     @Autowired
-    private SubjectMapper subjectMapper;
+    private ISubjectMapper subjectMapper;
 
 
     @Override
-    public ServerResponse<String> publishTask(Subject newTask) {
-        return null;
+    public ServerResponse<String> publishSubject(Subject newSubject) {
+        int resultCount = subjectMapper.publishSubject(newSubject);
+        if (resultCount == 0) {
+            return ServerResponse.createByErrorMsg("发布课题失败");
+        }
+
+        return ServerResponse.createBySuccessMsg("发布课题成功");
     }
 
     @Override
@@ -32,7 +37,7 @@ public class SubjectService implements ISubjectService {
 
         int resultCount = subjectMapper.checkNameValid(newSubject.getSubjectName());
         if (resultCount > 0) {
-            return ServerResponse.createByErrorMsg("申报课题已存在，申报失败");
+            return ServerResponse.createByErrorMsg("课题名称重复，申报失败");
         }
 
         int teacherCount = subjectMapper.checkTeacherValid(newSubject.getGuideTeacher());
@@ -52,8 +57,9 @@ public class SubjectService implements ISubjectService {
     @Override
     public ServerResponse<List<Subject>> refreshAuditList(String username) {
         List<Subject> subjects = subjectMapper.getAuditList(username);
-        if (subjects == null) {
-            return ServerResponse.createBySuccessMsg("无需要审批的申报课题");
+
+        if (subjects.size() == 0) {
+            return ServerResponse.createByErrorMsg("无需要审批的申报课题");
         }
 
         return ServerResponse.createBySuccess("查询成功", subjects);
@@ -86,12 +92,68 @@ public class SubjectService implements ISubjectService {
     }
 
     @Override
-    public ServerResponse<Subject> getDeclareSubject(String number) {
-        Subject subject = subjectMapper.getDeclareSubject(number);
-        if (subject == null) {
-            return ServerResponse.createByErrorMsg("还未申报课题");
+    public ServerResponse<String> selectSubject(String username, String number, int id) {
+        int resultCount = subjectMapper.selectSubject(username, number, id);
+        if (resultCount == 0) {
+            return ServerResponse.createByErrorMsg("选题失败");
         }
 
-        return ServerResponse.createBySuccess("查询成功", subject);
+        return ServerResponse.createBySuccessMsg("选题成功");
+    }
+
+    @Override
+    public ServerResponse<Subject> getDeclaredSubject(String number) {
+
+        Subject declaredSubject = subjectMapper.checkDeclaredSubject(number);
+        Subject selectedSubject = subjectMapper.checkSelectedSubject(number);
+
+        if (declaredSubject == null && selectedSubject == null) {
+            return ServerResponse.createByErrorMsg("未申报过或选择过课题");
+        } else if (declaredSubject != null && selectedSubject == null) {
+            return ServerResponse.createBySuccess("已查询到申报的课题", declaredSubject);
+        } else if (declaredSubject == null && selectedSubject != null) {
+            return ServerResponse.createByErrorMsg("已选择过课题");
+        }
+
+        return ServerResponse.createByErrorMsg("查询失败");
+    }
+
+    @Override
+    public ServerResponse<Subject> getSelectedSubject(String number) {
+
+        Subject declaredSubject = subjectMapper.checkDeclaredSubject(number);
+        Subject selectedSubject = subjectMapper.checkSelectedSubject(number);
+
+        if (declaredSubject == null && selectedSubject == null) {
+            return ServerResponse.createByErrorMsg("未申报过或选择过课题");
+        } else if (declaredSubject != null && selectedSubject == null) {
+            return ServerResponse.createByErrorMsg("已申报过课题");
+        } else if (declaredSubject == null && selectedSubject != null) {
+            return ServerResponse.createBySuccess("已查询到选择的课题", selectedSubject);
+        }
+
+        return ServerResponse.createByErrorMsg("查询失败");
+    }
+
+    @Override
+    public ServerResponse<List<Subject>> getUnSelectedSubjects() {
+
+        List<Subject> unSelectedSubjects = subjectMapper.getUnSelectedSubjects();
+
+        if (unSelectedSubjects.size() == 0) {
+            return ServerResponse.createByErrorMsg("无未选课题");
+        }
+
+        return ServerResponse.createBySuccess("查询成功", unSelectedSubjects);
+    }
+
+    @Override
+    public ServerResponse<List<Subject>> getMyGuideSubjects(String username) {
+        List<Subject> subjects = subjectMapper.getMyGuideSubject(username);
+        if (subjects.size() == 0) {
+            return ServerResponse.createByErrorMsg("查询成功，无负责课题");
+        }
+
+        return ServerResponse.createBySuccess("查询成功", subjects);
     }
 }

@@ -1,7 +1,12 @@
 import com.ylxt.util.MD5Util;
 
 public class TestMain {
+
     public static void main(String[] args) {
-        System.out.println(MD5Util.MD5EncodeUtf8("123456"));
+        String a = new String("123");
+        String b = "123";
+
+
+        System.out.println(a == b);
     }
 }

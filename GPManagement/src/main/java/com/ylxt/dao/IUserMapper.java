@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-public interface UserMapper {
+public interface IUserMapper {
     @Select("SELECT COUNT(1) FROM user_table WHERE number = #{number} ")
     int checkUserNumber(String number);
 
@@ -28,4 +28,7 @@ public interface UserMapper {
     int updateUser(@Param("number") String number,
                    @Param("phone") String phone,
                    @Param("email") String email);
+
+    @Select("SELECT * FROM user_table WHERE username = (SELECT guide_teacher FROM subject_table WHERE number = #{number})")
+    User getGuideTeacher(String number);
 }

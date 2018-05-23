@@ -12,25 +12,9 @@ public class Subject {
     private String ability;
     private String target;
     private String guideTeacher;
+    private int source;
     private String attachment;
     private int status;
-
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
-    }
 
     public int getId() {
         return id;
@@ -46,6 +30,14 @@ public class Subject {
 
     public void setStudentName(String studentName) {
         this.studentName = studentName;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
     }
 
     public String getSubjectName() {
@@ -112,11 +104,27 @@ public class Subject {
         this.guideTeacher = guideTeacher;
     }
 
+    public int getSource() {
+        return source;
+    }
+
+    public void setSource(int source) {
+        this.source = source;
+    }
+
     public String getAttachment() {
         return attachment;
     }
 
     public void setAttachment(String attachment) {
         this.attachment = attachment;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

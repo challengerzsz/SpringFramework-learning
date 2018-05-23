@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-<mapper namespace="com.ylxt.dao.SubjectMapper">
+<mapper namespace="com.ylxt.dao.ISubjectMapper">
     <resultMap id="BaseResultMap" type="com.ylxt.pojo.Subject">
         <!--<constructor>-->
         <!--<idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer"/>-->
@@ -18,8 +18,13 @@
     </resultMap>
 
     <insert id="declareSubject" parameterType="com.ylxt.pojo.Subject">
-        INSERT INTO declaration_subject_table VALUES
-        (null , #{studentName}, #{number}, #{subjectName}, #{topicSource}, #{subjectType}, #{topicType}, #{topicPaper}, #{ability}, #{target}, #{guideTeacher}, null, 0 )
+        INSERT INTO subject_table VALUES
+        (null , #{studentName}, #{number}, #{subjectName}, #{topicSource}, #{subjectType}, #{topicType}, #{topicPaper}, #{ability}, #{target}, #{guideTeacher}, 0, null, 0 )
+    </insert>
+
+    <insert id="publishSubject" parameterType="com.ylxt.pojo.Subject">
+        INSERT INTO subject_table VALUES
+        (null, null, null, #{subjectName}, #{topicSource}, #{subjectType}, #{topicType}, #{topicPaper}, #{ability}, #{target}, #{guideTeacher}, 1, null, 0)
     </insert>
 
 </mapper>

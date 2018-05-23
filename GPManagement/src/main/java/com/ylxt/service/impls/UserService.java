@@ -1,7 +1,7 @@
 package com.ylxt.service.impls;
 
 import com.ylxt.common.ServerResponse;
-import com.ylxt.dao.UserMapper;
+import com.ylxt.dao.IUserMapper;
 import com.ylxt.pojo.User;
 import com.ylxt.service.IUserService;
 import com.ylxt.util.MD5Util;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 public class UserService implements IUserService {
 
     @Autowired
-    private UserMapper userMapper;
+    private IUserMapper userMapper;
 
     @Override
     public ServerResponse<User> login(String number, String password) {
@@ -64,6 +64,19 @@ public class UserService implements IUserService {
         }
 
         return ServerResponse.createByErrorMsg("更新个人信息失败");
+    }
+
+    @Override
+    public ServerResponse<User> getGuideTeacher(String number) {
+        User teacher = userMapper.getGuideTeacher(number);
+
+        if (teacher == null) {
+            return ServerResponse.createByErrorMsg("查询失败,无指导老师");
+        }
+
+        teacher.setPassword(StringUtils.EMPTY);
+
+        return ServerResponse.createBySuccess("查询成功", teacher);
     }
 
 }

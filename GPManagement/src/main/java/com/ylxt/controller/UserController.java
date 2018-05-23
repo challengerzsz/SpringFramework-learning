@@ -72,4 +72,18 @@ public class UserController {
         return response;
     }
 
+    @RequestMapping(value = "get_guide_teacher.do", method = RequestMethod.POST)
+    public ServerResponse<User> getGuideTeacher(HttpSession session) {
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if (user == null) {
+            return ServerResponse.createByErrorMsg("未登录");
+        }
+        if (user.getType() != 2) {
+            return ServerResponse.createByErrorMsg("仅学生可操作");
+        }
+
+        return userService.getGuideTeacher(user.getNumber());
+
+    }
+
 }

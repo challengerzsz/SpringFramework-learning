@@ -1,21 +1,21 @@
 package com.ylxt.util;
 
+import com.ylxt.common.Const;
+
 import java.io.File;
 import java.util.UUID;
 
 public class FileUtil {
 
-    public static final String DECLARE_SUBJECT_PATH = "/DECLARE_SUBJECT_PATH";
+    public static final String SUBJECT_PATH = "/SUBJECT_PATH";
 
-    public static final String START_REPORT = "/START_REPORT";
+    public static final String START_REPORT_PATH = "/START_REPORT";
 
-    public static final String MIDDLE_REPORT = "/MIDDLE_REPORT";
+    public static final String MIDDLE_REPORT_PATH = "/MIDDLE_REPORT";
 
-    public static final String DRAFT_PAPER = "/DRAFT_PAPER";
+    public static final String DRAFT_PAPER_PATH = "/DRAFT_PAPER";
 
-    public static final String FINALIZED_PAPER = "/FINALIZED_PAPER";
-
-
+    public static final String FINALIZED_PAPER_PATH = "/FINALIZED_PAPER";
 
 
     public static String getPrefix(int type, String number) {
@@ -23,19 +23,19 @@ public class FileUtil {
 
         switch (type) {
             case 0:
-                prefix = DECLARE_SUBJECT_PATH + "/" + number;
+                prefix = SUBJECT_PATH + "/" + number;
                 break;
             case 1:
-                prefix = START_REPORT + "/" + number;
+                prefix = START_REPORT_PATH + "/" + number;
                 break;
             case 2:
-                prefix = MIDDLE_REPORT + "/" + number;
+                prefix = MIDDLE_REPORT_PATH + "/" + number;
                 break;
             case 3:
-                prefix = DRAFT_PAPER + "/" + number;
+                prefix = DRAFT_PAPER_PATH + "/" + number;
                 break;
             case 4:
-                prefix = FINALIZED_PAPER + "/" + number;
+                prefix = FINALIZED_PAPER_PATH + "/" + number;
                 break;
         }
 
@@ -79,5 +79,30 @@ public class FileUtil {
         }
 
         return targetFile;
+    }
+
+    public static String getFileTable(int type) {
+        String table = null;
+
+        switch (type) {
+            case 0:
+                table = Const.SUBJECT_TABLE;
+                break;
+            case 1:
+                table = Const.START_REPORT_TABLE;
+                break;
+            case 2:
+                table = Const.MIDDLE_REPORT_TABLE;
+                break;
+            case 3:
+                table = Const.DRAFT_PAPER_TABLE;
+                break;
+            case 4:
+                table = Const.FINALIZED_PAPER_TABLE;
+                break;
+        }
+
+        return table;
+
     }
 }

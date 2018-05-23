@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ISubjectService {
 
-    ServerResponse<String> publishTask(Subject newTask);
+    ServerResponse<String> publishSubject(Subject newTask);
 
     ServerResponse<String> declareSubject(Subject newSubject);
 
@@ -17,5 +17,13 @@ public interface ISubjectService {
 
     boolean checkValid(int id);
 
-    ServerResponse<Subject> getDeclareSubject(String number);
+    ServerResponse<String> selectSubject(String username, String number, int id);
+
+    ServerResponse<Subject> getDeclaredSubject(String number);
+
+    ServerResponse<Subject> getSelectedSubject(String number);
+
+    ServerResponse<List<Subject>> getUnSelectedSubjects();
+
+    ServerResponse<List<Subject>> getMyGuideSubjects(String username);
 }

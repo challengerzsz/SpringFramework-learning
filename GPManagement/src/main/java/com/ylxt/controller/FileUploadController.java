@@ -5,6 +5,7 @@ import com.ylxt.common.ServerResponse;
 import com.ylxt.pojo.User;
 import com.ylxt.service.IFileService;
 import com.ylxt.util.FileUtil;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,6 +21,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/file/")
 public class FileUploadController {
+
+    Logger logger = Logger.getLogger(FileUploadController.class);
 
     @Autowired
     private IFileService fileService;
@@ -60,6 +63,11 @@ public class FileUploadController {
         String serverPort = String.valueOf(request.getServerPort());
         String contextPath = request.getContextPath();
 
+        logger.info(request.getRequestURL());
+        logger.info(serverName);
+        logger.info(serverPort);
+        logger.info(contextPath);
+
         String uploadFilesPath = null;
 
         for (MultipartFile file : multipartFiles) {
@@ -79,8 +87,8 @@ public class FileUploadController {
             }
         }
 
-        fileService.saveFilePath(type, uploadFilesPath, user.getNumber());
+        ServerResponse<String> response = fileService.saveFilePath(type, uploadFilesPath, user.getNumber());
 
-        return ServerResponse.createBySuccess("文件上传成功", uploadFilesPath);
+        return response;
     }
 }

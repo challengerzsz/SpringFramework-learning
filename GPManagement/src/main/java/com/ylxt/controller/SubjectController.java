@@ -23,7 +23,7 @@ public class SubjectController {
 
 
     @RequestMapping(value = "publish_subject.do", method = RequestMethod.POST)
-    public ServerResponse<String> publishTask(HttpSession session, Subject newTask) {
+    public ServerResponse<String> publishTask(HttpSession session, Subject newSubject) {
 
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
@@ -34,11 +34,9 @@ public class SubjectController {
             return ServerResponse.createByErrorMsg("无权限");
         }
 
-        ServerResponse<String> response = subjectService.publishTask(newTask);
+        newSubject.setGuideTeacher(user.getUsername());
 
-        if (!response.isSuccess()) {
-            return ServerResponse.createByErrorMsg("发布新选题失败");
-        }
+        ServerResponse<String> response = subjectService.publishSubject(newSubject);
 
         return response;
     }
@@ -64,6 +62,33 @@ public class SubjectController {
         return response;
     }
 
+    @RequestMapping(value = "select_subject.do", method = RequestMethod.POST)
+    public ServerResponse<String> selectSubject(HttpSession session, int id) {
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if (user == null) {
+            return ServerResponse.createByErrorMsg("未登录");
+        }
+
+        if (user.getType() != 2) {
+            return ServerResponse.createByErrorMsg("仅学生可选择课题");
+        }
+
+        ServerResponse<String> response = subjectService.selectSubject(user.getUsername(), user.getNumber(), id);
+        if (response.isSuccess()) {
+            return ServerResponse.createBySuccessMsg("选题成功");
+        }
+
+        return response;
+    }
+
+    @RequestMapping(value = "get_unselected_subjects.do", method = RequestMethod.POST)
+    public ServerResponse<List<Subject>> getUnSelectedSubjects() {
+
+        ServerResponse<List<Subject>> unSelectedSubjects = subjectService.getUnSelectedSubjects();
+
+        return unSelectedSubjects;
+    }
+
     @RequestMapping(value = "refresh_audit_list.do", method = RequestMethod.POST)
     public ServerResponse<List<Subject>> refreshAuditList(HttpSession session) {
 
@@ -76,9 +101,6 @@ public class SubjectController {
         }
 
         ServerResponse<List<Subject>> response = subjectService.refreshAuditList(user.getUsername());
-        if (response.isSuccess()) {
-            return ServerResponse.createByErrorMsg("查询失败");
-        }
 
         return response;
     }
@@ -108,7 +130,7 @@ public class SubjectController {
         return response;
     }
 
-    @RequestMapping(value = "get_declare_subject.do", method = RequestMethod.POST)
+    @RequestMapping(value = "get_declared_subject.do", method = RequestMethod.POST)
     public ServerResponse<Subject> getDeclareSubject(HttpSession session) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
@@ -119,8 +141,40 @@ public class SubjectController {
             return ServerResponse.createByErrorMsg("仅学生有此选项");
         }
 
-        ServerResponse<Subject> response = subjectService.getDeclareSubject(user.getNumber());
+        ServerResponse<Subject> response = subjectService.getDeclaredSubject(user.getNumber());
 
         return response;
+    }
+
+
+    @RequestMapping(value = "get_selected_subject.do", method = RequestMethod.POST)
+    public ServerResponse<Subject> getSelectedSubject(HttpSession session) {
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if (user == null) {
+            return ServerResponse.createByErrorMsg("未登录");
+        }
+
+        if (user.getType() != 2) {
+            return ServerResponse.createByErrorMsg("仅学生有此选项");
+        }
+
+        ServerResponse<Subject> response = subjectService.getSelectedSubject(user.getNumber());
+
+        return response;
+    }
+
+    @RequestMapping(value = "get_my_guide_subjects.do", method = RequestMethod.POST)
+    public ServerResponse<List<Subject>> getMyGuideSubjects(HttpSession session) {
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if (user == null) {
+            return ServerResponse.createByErrorMsg("未登录");
+        }
+        if (user.getType() == 2) {
+            return ServerResponse.createByErrorMsg("无权限");
+        }
+
+        ServerResponse<List<Subject>> onMyGuideSubjectsResponse = subjectService.getMyGuideSubjects(user.getUsername());
+
+        return onMyGuideSubjectsResponse;
     }
 }
