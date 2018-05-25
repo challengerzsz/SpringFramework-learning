@@ -27,8 +27,18 @@ public interface ISubjectMapper {
     })
     List<Subject> getAuditList(String username);
 
-    @Select("SELECT COUNT(1) FROM subject_table WHERE id = #{id}")
-    int checkIdValid(int id);
+    @Select("SELECT * FROM subject_table WHERE id = #{id}")
+    @Results({
+            @Result(property = "studentName", column = "student_name"),
+            @Result(property = "subjectName", column = "subject_name"),
+            @Result(property = "topicSource", column = "topic_source"),
+            @Result(property = "subjectType", column = "subject_type"),
+            @Result(property = "topicType", column = "topic_type"),
+            @Result(property = "topicPaper", column = "topic_paper"),
+            @Result(property = "guideTeacher", column = "guide_teacher"),
+            @Result(property = "attachment", column = "attachment"),
+    })
+    Subject checkIdValid(int id);
 
     @Update("UPDATE subject_table SET status = #{answer} WHERE id = #{id}")
     int confirmSubject(@Param("id") int id,
@@ -99,4 +109,32 @@ public interface ISubjectMapper {
     })
     List<Subject> getMyGuideSubject(String username);
 
+    @Select("SELECT * FROM subject_table WHERE number = #{number} AND status = 1")
+    @Results({
+            @Result(property = "studentName", column = "student_name"),
+            @Result(id = true, property = "subjectName", column = "subject_name"),
+            @Result(property = "topicSource", column = "topic_source"),
+            @Result(property = "subjectType", column = "subject_type"),
+            @Result(property = "topicType", column = "topic_type"),
+            @Result(property = "topicPaper", column = "topic_paper"),
+            @Result(property = "guideTeacher", column = "guide_teacher"),
+            @Result(property = "attachment", column = "attachment"),
+    })
+    Subject getMySubject(String number);
+
+    @Delete("DELETE FROM subject_table WHERE id = #{id}")
+    void deleteSubject(int id);
+
+    @Select("SELECT * FROM subject_table WHERE guide_teacher = #{username} AND source = 1")
+    @Results({
+            @Result(property = "studentName", column = "student_name"),
+            @Result(id = true, property = "subjectName", column = "subject_name"),
+            @Result(property = "topicSource", column = "topic_source"),
+            @Result(property = "subjectType", column = "subject_type"),
+            @Result(property = "topicType", column = "topic_type"),
+            @Result(property = "topicPaper", column = "topic_paper"),
+            @Result(property = "guideTeacher", column = "guide_teacher"),
+            @Result(property = "attachment", column = "attachment"),
+    })
+    List<Subject> getMyPublishedSubjects(String username);
 }

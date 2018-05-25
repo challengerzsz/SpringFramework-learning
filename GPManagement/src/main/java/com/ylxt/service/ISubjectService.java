@@ -15,7 +15,7 @@ public interface ISubjectService {
 
     ServerResponse<String> confirmSubject(int id, int answer);
 
-    boolean checkValid(int id);
+    Subject checkValid(int id);
 
     ServerResponse<String> selectSubject(String username, String number, int id);
 
@@ -26,4 +26,9 @@ public interface ISubjectService {
     ServerResponse<List<Subject>> getUnSelectedSubjects();
 
     ServerResponse<List<Subject>> getMyGuideSubjects(String username);
+
+    ServerResponse<Subject> getMySubject(String number);
+
+    ServerResponse<List<Subject>> getMyPublishedSubjects(String username);
+
 }

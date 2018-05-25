@@ -72,4 +72,5 @@ public class MessageController {
 
         return messageService.getSendEmails(user.getUsername());
     }
+
 }

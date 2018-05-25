@@ -177,4 +177,17 @@ public class SubjectController {
 
         return onMyGuideSubjectsResponse;
     }
+
+    @RequestMapping(value = "get_my_published_subject.do", method = RequestMethod.POST)
+    public ServerResponse<List<Subject>> getMyPublishedSubject(HttpSession session) {
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if (user == null) {
+            return ServerResponse.createByErrorMsg("未登录");
+        }
+        if (user.getType() == 2) {
+            return ServerResponse.createByErrorMsg("无权限");
+        }
+
+        return subjectService.getMyPublishedSubjects(user.getUsername());
+    }
 }
