@@ -4,6 +4,7 @@ import com.ylxt.common.ResponseCode;
 import com.ylxt.common.ServerResponse;
 import com.ylxt.dao.IReportMapper;
 import com.ylxt.dao.ISubjectMapper;
+import com.ylxt.pojo.MiddleReport;
 import com.ylxt.pojo.StartReport;
 import com.ylxt.pojo.Subject;
 import com.ylxt.pojo.User;
@@ -59,8 +60,27 @@ public class ReportService implements IReportService {
     }
 
     @Override
+    public ServerResponse<String> submitMiddleReport(User user, MiddleReport middleReport) {
+        Subject mySubject = subjectMapper.getMySubject(user.getNumber());
+
+        middleReport.setStudentName(user.getUsername());
+        middleReport.setNumber(user.getNumber());
+        middleReport.setSubjectName(mySubject.getSubjectName());
+        middleReport.setSubjectId(mySubject.getId());
+        middleReport.setGuideTeacher(mySubject.getGuideTeacher());
+
+        int resultCount = reportMapper.submitMiddleReport(middleReport);
+
+        if (resultCount == 0) {
+            return ServerResponse.createByErrorMsg("提交中期报告失败");
+        }
+
+        return ServerResponse.createBySuccessMsg("提交中期报告成功");
+    }
+
+    @Override
     public ServerResponse<String> confirmStartReport(int id, int answer, String opinion) {
-        StartReport startReport = this.checkValidById(id);
+        StartReport startReport = this.checkStartReportValidById(id);
         if (startReport == null) {
             return ServerResponse.createByErrorMsg("不存在该前期报告，审核失败");
         }
@@ -74,7 +94,7 @@ public class ReportService implements IReportService {
         if (answer == 1) {
             logService.sendGuideLog(startReport.getGuideTeacher(), startReport.getStudentName(), "您的前期报告审核已通过!");
         } else if (answer == -1) {
-            reportMapper.deleteReportById(id);
+            reportMapper.deleteStartReportById(id);
             logService.sendGuideLog(startReport.getGuideTeacher(), startReport.getStudentName(), "您的前期报告审核已被拒绝!  原因:" + opinion);
         }
 
@@ -83,8 +103,8 @@ public class ReportService implements IReportService {
     }
 
     @Override
-    public StartReport checkValidById(int id) {
-        StartReport startReport = reportMapper.checkValidById(id);
+    public StartReport checkStartReportValidById(int id) {
+        StartReport startReport = reportMapper.checkStartReportValidById(id);
         if (startReport != null) {
             return startReport;
         }
@@ -92,14 +112,81 @@ public class ReportService implements IReportService {
     }
 
     @Override
-    public ServerResponse<List<StartReport>> refreshAuditList(String username) {
-        List<StartReport> reports = reportMapper.getAuditList(username);
+    public MiddleReport checkMiddleReportValidById(int id) {
+        MiddleReport middleReport = reportMapper.checkMiddleReportValidById(id);
+        if (middleReport != null) {
+            return middleReport;
+        }
+
+        return null;
+    }
+
+    @Override
+    public ServerResponse<List<StartReport>> refreshStartReportAuditList(String username) {
+        List<StartReport> reports = reportMapper.getStartReportAuditList(username);
 
         if (reports.size() == 0) {
             return ServerResponse.createByErrorMsg("无需要审批的前期报告");
         }
 
         return ServerResponse.createBySuccess("查询成功", reports);
+    }
+
+    @Override
+    public ServerResponse<MiddleReport> checkMiddleReportValid(String number) {
+        Subject mySubject = subjectMapper.getMySubject(number);
+        if (mySubject == null) {
+            return ServerResponse.createByErrorMsg("未拥有课题或课题未通过审核");
+        }
+
+        StartReport myStartReport = reportMapper.getMyStartReport(number);
+        if (myStartReport == null) {
+            return ServerResponse.createByErrorMsg("未提交开题报告");
+        }
+
+        MiddleReport middleReport = reportMapper.getMyMiddleReport(number);
+        if (middleReport == null) {
+            return ServerResponse.createByErrorCodeMsg(ResponseCode.NONE_REPORT.getCode(), "未提交过中期报告");
+        }
+
+        return ServerResponse.createBySuccess("查询成功", middleReport);
+    }
+
+    @Override
+    public ServerResponse<List<MiddleReport>> refreshMiddleReportAuditList(String username) {
+        List<MiddleReport> reports = reportMapper.getMiddleReportAuditList(username);
+
+        if (reports.size() == 0) {
+            return ServerResponse.createByErrorMsg("无需要审批的中期报告");
+        }
+
+        return ServerResponse.createBySuccess("查询成功", reports);
+    }
+
+    @Override
+    public ServerResponse<String> confirmMiddleReport(int id, int answer) {
+        MiddleReport middleReport = this.checkMiddleReportValidById(id);
+        if (middleReport == null) {
+            return ServerResponse.createByErrorMsg("不存在该中期报告，审核失败");
+        }
+
+        logger.info(middleReport.getStudentName());
+
+        int resultCount = reportMapper.confirmMiddleReport(id, answer);
+        if (resultCount == 0) {
+            return ServerResponse.createByErrorMsg("审核中期报告失败");
+        }
+
+
+        if (answer == 1) {
+            logService.sendGuideLog(middleReport.getGuideTeacher(), middleReport.getStudentName(), "您的中期报告审核已通过!");
+        } else if (answer == -1) {
+            reportMapper.deleteMiddleReportById(id);
+            logService.sendGuideLog(middleReport.getGuideTeacher(), middleReport.getStudentName(), "您的中期报告审核已被拒绝!");
+        }
+
+
+        return ServerResponse.createBySuccessMsg("审核成功");
     }
 
 

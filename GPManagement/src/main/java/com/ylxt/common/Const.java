@@ -12,5 +12,5 @@ public class Const {
 
     public static final String DRAFT_PAPER_TABLE = "draft_paper_table";
 
-    public static final String FINALIZED_PAPER_TABLE = "finalized_paper_table";
+    public static final String FINALIZED_PAPER_TABLE = "paper_table";
 }

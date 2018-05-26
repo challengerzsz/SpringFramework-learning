@@ -72,6 +72,8 @@ public class FileUploadController {
 
         for (MultipartFile file : multipartFiles) {
 
+            logger.info("test");
+
             File targetFile = FileUtil.getTargetFile(saveFilePrefixDir, file.getOriginalFilename());
 
             try {

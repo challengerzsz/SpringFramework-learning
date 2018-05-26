@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.ylxt.dao.IPaperMapper">
+    <resultMap id="BaseResultMap" type="com.ylxt.pojo.Paper"/>
+
+    <insert id="submitPaper" parameterType="com.ylxt.pojo.Paper">
+        INSERT INTO paper_table VALUES
+        (null, #{number}, #{studentName}, #{subjectName}, #{subjectId}, null, #{guideTeacher}, 0, 0)
+    </insert>
+
+
+</mapper>

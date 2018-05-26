@@ -9,4 +9,9 @@
         (null, #{number}, #{studentName}, #{subjectName}, #{subjectId}, #{purpose}, #{basis}, #{problems}, #{plan}, null, #{guideTeacher}, null, 0)
     </insert>
 
+
+    <insert id="submitMiddleReport" parameterType="com.ylxt.pojo.MiddleReport">
+        INSERT INTO middle_report_table VALUES
+        (null, #{number}, #{studentName}, #{subjectName}, #{subjectId}, #{designArea}, #{midConclusion}, null, #{guideTeacher}, 0)
+    </insert>
 </mapper>
