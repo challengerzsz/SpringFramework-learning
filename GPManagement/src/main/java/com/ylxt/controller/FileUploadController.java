@@ -72,7 +72,6 @@ public class FileUploadController {
 
         for (MultipartFile file : multipartFiles) {
 
-            logger.info("test");
 
             File targetFile = FileUtil.getTargetFile(saveFilePrefixDir, file.getOriginalFilename());
 
@@ -87,9 +86,11 @@ public class FileUploadController {
             } else {
                 uploadFilesPath = uploadFilesPath + "," + FileUtil.getSavePaths(serverName, serverPort, contextPath, type, user.getNumber(), targetFile);
             }
+
+
         }
 
-        ServerResponse<String> response = fileService.saveFilePath(type, uploadFilesPath, user.getNumber());
+        ServerResponse<String> response = fileService.saveFilePath(user, type, uploadFilesPath, user.getNumber());
 
         return response;
     }

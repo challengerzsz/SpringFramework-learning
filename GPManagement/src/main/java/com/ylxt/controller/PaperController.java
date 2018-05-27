@@ -37,7 +37,7 @@ public class PaperController {
             return ServerResponse.createByErrorMsg("未登录");
         }
 
-        return paperService.submit(user);
+        return paperService.initPaper(user);
     }
 
     @RequestMapping(value = "refresh_paper_audit_list.do", method = RequestMethod.POST)

@@ -49,7 +49,7 @@ public class PaperService implements IPaperService {
     }
 
     @Override
-    public ServerResponse<String> submit(User user) {
+    public ServerResponse<String> initPaper(User user) {
         Subject mySubject = subjectMapper.getMySubject(user.getNumber());
 
         Paper paper = new Paper();

@@ -10,7 +10,7 @@ public interface IPaperService {
 
     ServerResponse<Paper> checkPaperValid(String number);
 
-    ServerResponse<String> submit(User user);
+    ServerResponse<String> initPaper(User user);
 
     ServerResponse<List<Paper>> refreshPaperAuditList(String username);
 

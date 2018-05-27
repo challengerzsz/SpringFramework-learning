@@ -6,7 +6,7 @@
 
     <insert id="submitPaper" parameterType="com.ylxt.pojo.Paper">
         INSERT INTO paper_table VALUES
-        (null, #{number}, #{studentName}, #{subjectName}, #{subjectId}, null, #{guideTeacher}, 0, 0)
+        (null, #{number}, #{studentName}, #{subjectName}, #{subjectId}, null, #{guideTeacher}, 0, 0, null )
     </insert>
 
 
