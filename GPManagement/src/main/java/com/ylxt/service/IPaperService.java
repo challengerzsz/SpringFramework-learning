@@ -14,7 +14,7 @@ public interface IPaperService {
 
     ServerResponse<List<Paper>> refreshPaperAuditList(String username);
 
-    ServerResponse<String> confirmPaper(int id, int answer, int score);
+    ServerResponse<String> confirmPaper(int id, int answer, int score, String message);
 
     ServerResponse<Paper> checkResultValid(User user);
 }

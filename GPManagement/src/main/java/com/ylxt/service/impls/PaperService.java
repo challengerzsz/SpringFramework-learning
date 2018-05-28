@@ -78,13 +78,13 @@ public class PaperService implements IPaperService {
     }
 
     @Override
-    public ServerResponse<String> confirmPaper(int id, int answer, int score) {
+    public ServerResponse<String> confirmPaper(int id, int answer, int score, String message) {
         Paper paper = paperMapper.checkValidById(id);
         if (paper == null) {
             return ServerResponse.createByErrorMsg("该论文定稿不存在，审核失败");
         }
 
-        int resultCount = paperMapper.confirmPaper(id, answer, score);
+        int resultCount = paperMapper.confirmPaper(id, answer, score, message);
         if (resultCount == 0) {
             return ServerResponse.createByErrorMsg("审核失败");
         }

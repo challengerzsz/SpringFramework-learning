@@ -36,10 +36,11 @@ public interface IPaperMapper {
     })
     Paper checkValidById(int id);
 
-    @Update("UPDATE paper_table SET status = #{answer}, score = #{score} WHERE id = #{id}")
+    @Update("UPDATE paper_table SET status = #{answer}, score = #{score}, message = #{message} WHERE id = #{id}")
     int confirmPaper(@Param("id") int id,
                      @Param("answer") int answer,
-                     @Param("score") int score);
+                     @Param("score") int score,
+                     @Param("message") String message);
 
     @Delete("DELETE FROM paper_table WHERE id = #{id}")
     void deletePaper(int id);

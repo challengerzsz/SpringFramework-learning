@@ -54,7 +54,7 @@ public class PaperController {
     }
 
     @RequestMapping(value = "confirm_paper.do", method = RequestMethod.POST)
-    public ServerResponse<String> confirmPaper(HttpSession session, int id, int answer, int score) {
+    public ServerResponse<String> confirmPaper(HttpSession session, int id, int answer, int score, String message) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
             return ServerResponse.createByErrorMsg("未登录");
@@ -63,7 +63,7 @@ public class PaperController {
             return ServerResponse.createByErrorMsg("仅老师可进行操作");
         }
 
-        return paperService.confirmPaper(id, answer, score);
+        return paperService.confirmPaper(id, answer, score, message);
     }
 
     @RequestMapping(value = "check_result_valid.do", method = RequestMethod.POST)
